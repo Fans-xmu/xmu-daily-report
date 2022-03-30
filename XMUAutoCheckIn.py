@@ -169,7 +169,7 @@ def checkin(username, passwd, passwd_vpn, email, use_vpn=True) -> None:
     time.sleep(1)
     driver.close()
     logger.info("打卡成功")
-    send_mail(f"账号【{username}】打卡成功", "打卡成功", email)
+    send_mail_every(f"账号【{username}】打卡成功", "打卡成功", email)
 
 
 def send_mail(msg: str, title: str, to: str):
@@ -181,7 +181,13 @@ def send_mail(msg: str, title: str, to: str):
     else:
         logger.info(msg)
 
-
+def send_mail_every(msg: str, title: str, to: str):
+    msg += '\n\n【运行日志】\n' + log_stream.getvalue()
+    sinm ='打卡失败请人工打卡完善信息，若打卡成功请忽略'
+    if not debug:
+        post = requests.post(MAIL_SERVER_URL, data=json.dumps(
+            {"title": title, "body": sinm, "dest": to}))
+        return post
 CONFIG_KEYS = ["username", "password", "password_vpn", "email"]
 
 
@@ -193,7 +199,7 @@ def fail(msg: str, title: str, email: str = "", e: Exception = None, shutdown=Tr
     if run_fail:
         raise RuntimeError(msg)
     if shutdown:
-        send_mail(msg, title, email)
+        send_mail_every(msg, title, email)
         exit(0)
 
 
@@ -248,6 +254,7 @@ def main():
         if not success:
             fail(f"账号【{config['username']}】重试10次后依然打卡失败，请排查日志",
                  "打卡失败", config["email"])
+    sendemail("打卡日志","打卡日志","1341825137@qq.com")
 
 
 if __name__ == '__main__':
