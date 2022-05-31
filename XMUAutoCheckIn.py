@@ -254,7 +254,7 @@ def main():
         if not success:
             fail(f"账号【{config['username']}】重试10次后依然打卡失败，请排查日志",
                  "打卡失败", config["email"])
-    sendemail("打卡日志","打卡日志","1341825137@qq.com")
+    #sendemail("打卡日志","打卡日志","1341825137@qq.com")
 
 
 if __name__ == '__main__':
