@@ -157,6 +157,13 @@ def checkin(username, passwd, passwd_vpn, email, use_vpn=True) -> None:
         ['//*[@id="address_1582538163410"]/div/div[3]/div/div', '//label[@title="余杭区"][1]', '区'],
         ["//*[@id='select_1582538939790']/div/div/span[1]", "/html/body/div[8]/ul/div/div[3]/li/label", '本人承诺']
     ]
+    if str(username)=='23020201153811':
+        dropdowns = [
+        ['//*[@id="address_1582538163410"]/div/div[1]/div/div', '//label[@title="上海市"][1]', '省'],
+        ['//*[@id="address_1582538163410"]/div/div[2]/div/div', '//label[@title="市辖区"][1]', '市'],
+        ['//*[@id="address_1582538163410"]/div/div[3]/div/div', '//label[@title="长宁区"][1]', '区'],
+        ["//*[@id='select_1582538939790']/div/div/span[1]", "/html/body/div[8]/ul/div/div[3]/li/label", '本人承诺']
+    ]
     for dropdown in dropdowns:
         if NULL in get_text(driver, dropdown[0], dropdown[2]):
             select_dropdown(driver, *dropdown)
