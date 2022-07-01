@@ -164,6 +164,7 @@ def checkin(username, passwd, passwd_vpn, email, use_vpn=True) -> None:
         ['//*[@id="address_1582538163410"]/div/div[3]/div/div', '//label[@title="长宁区"][1]', '区'],
         ["//*[@id='select_1582538939790']/div/div/span[1]", "/html/body/div[8]/ul/div/div[3]/li/label", '本人承诺']
     ]
+    
     for dropdown in dropdowns:
         if NULL in get_text(driver, dropdown[0], dropdown[2]):
             select_dropdown(driver, *dropdown)
@@ -240,6 +241,8 @@ def main():
     configs = get_configs()
     for config in configs:
         logger.info(f"账号正在运行")
+        if str(confg["username"])=='35520191153092':
+            continue
         success = False
         for i in range(1, 2 if debug else 11):
             logger.info(f'第{i}次尝试')
