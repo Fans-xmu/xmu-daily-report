@@ -241,9 +241,9 @@ def main():
     configs = get_configs()
     for config in configs:
         logger.info(f"账号正在运行")
-        if str(confg["username"])=='35520191153092':
+        if str(config["username"])=='35520191153092':
             continue
-        if str(confg["username"])=='23020191153177':
+        if str(config["username"])=='23020191153177':
             continue
         success = False
         for i in range(1, 2 if debug else 11):
