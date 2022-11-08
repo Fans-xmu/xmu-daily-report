@@ -170,10 +170,10 @@ def checkin(username, passwd, passwd_vpn, email, use_vpn=True) -> None:
 
     time.sleep(1)
     # 保存确定
-#     if not debug:
-    driver.switch_to.alert.accept()
-#     else:
-#         driver.switch_to.alert.dismiss()
+    if not debug:
+        driver.switch_to.alert.accept()
+    else:
+        driver.switch_to.alert.dismiss()
     time.sleep(1)
     driver.close()
     logger.info("打卡成功")
